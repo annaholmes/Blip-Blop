@@ -9,6 +9,8 @@ public class Peer {
     private static int port = 3000;
     private Socket socket;
 
+    private String ip = "209.65.56.40";
+    
     public static void main(String[] args) throws IOException {
         //Peer p = new Peer(Integer.parseInt(args[0]));
         Peer p = new Peer(port);
@@ -21,7 +23,7 @@ public class Peer {
 
     public Peer(int port) throws IOException {
         accepter = new ServerSocket(port);
-        System.out.println("Server: IP address: " + accepter.getInetAddress() + " (" + port + ")");
+        System.out.println("Server: IP address: " + ip + " (" + port + ")");
     }
 
     public void quit() {
