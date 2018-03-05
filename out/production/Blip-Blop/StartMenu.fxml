@@ -8,13 +8,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TalkClientController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Peer">
    <children>
       <VBox layoutX="213.0" layoutY="83.0" prefHeight="400.0" prefWidth="146.0" style="-fx-background-color: blanchedalmond; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="217.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
                <children>
-                  <Button fx:id="start" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Start Drawing" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                  <Button fx:id="start" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startDrawing" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Start Drawing" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
                      <effect>
                         <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
                      </effect></Button>
@@ -35,12 +35,12 @@
                               <DropShadow color="#00000072" offsetX="5.0" offsetY="5.0" />
                            </effect>
                         </TextField>
-                        <Button fx:id="join" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Connect" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+                        <Button fx:id="join" layoutY="100.0" mnemonicParsing="false" onAction="#joinDrawing" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Connect" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
                            <effect>
                               <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
                            </effect></Button>
                         <TextArea fx:id="outgoing" prefHeight="150.0" prefWidth="100.0" promptText="your message" />
-                        <Button fx:id="send" layoutX="115.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Send Text">
+                        <Button fx:id="send" layoutX="115.0" layoutY="10.0" mnemonicParsing="false" onAction="#sendDrawing" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Send Text">
                            <effect>
                               <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
                            </effect>

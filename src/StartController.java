@@ -27,9 +27,9 @@ public class StartController {
     @FXML
     private Button send;
 
-    private Peer2 peer;
+    private Peer peer;
 
-    public void initialize() {
+    /*public void initialize() {
         try {
             this.peer = new Peer2(3000);
         } catch (IOException e) {
@@ -69,5 +69,5 @@ public class StartController {
     public void sendText(String message){
         peer.sendToServer(message);
 
-    }
+    }*/
 }
