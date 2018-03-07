@@ -30,7 +30,7 @@ public class Main extends Application {
         Parent root = load.load(getClass().getResource("StartMenu.fxml"));
 
         primaryStage.setTitle("Blip-Blop");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root,900, 550));
         primaryStage.show();
     }
 

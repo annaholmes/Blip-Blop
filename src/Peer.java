@@ -24,7 +24,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Path;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -68,6 +70,12 @@ public class Peer implements Initializable {
 
     @FXML
     Pane imgPane;
+
+    @FXML
+    VBox startSide;
+
+   @FXML
+   HBox drawingSide;
 
     @FXML
     Button save;
@@ -342,55 +350,15 @@ public class Peer implements Initializable {
 
 
     public void updateDrawing(byte[] b) {
-        //incoming.setText(String.valueOf(m));
-
         Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(b)), 0, 0, pCanvas.getWidth(), pCanvas.getHeight()));
-        /*System.out.println(this.data.getArray() == null);
-        System.out.println("is imgpane null: ");
-        System.out.println(this.imgPane == null);
-        Platform.runLater(new Runnable() {
-                              @Override
-                              public void run() {
-                                  System.out.println("but really tho?");
-                                  System.out.println(imgPane==null);
-                                /*  pCanvas.getGraphicsContext2D().beginPath();
-                                  pCanvas.getGraphicsContext2D().fillRoundRect(110, 60, 30, 30, 10, 10);
-                                  pCanvas.getGraphicsContext2D().closePath();*/
-                                  //  imgPane.getChildren().add(new ImageView(new Image(new ByteArrayInputStream(b))));
-                             // }
-
-                         // });
-
-        /*System.out.println(data.isNewMessage());
-        System.out.println("is canvas null: ");
-        System.out.println(pCanvas == null);*/
-
-        /*System.out.println("got to this function");
-            //if (this.canvas != null) {
-        System.out.println("hello");
-            //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
-            //System.out.println(context != null);
-        //restartEverything(new Image(new ByteArrayInputStream(data.getArray())));
-        System.out.println(b);
-        System.out.println(pCanvas.getHeight());
-        System.out.println("image drawn");
-        Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(b)),2, 4, 20, 20));
-        /*data.setNewMessage(false);
-        System.out.println("got to this function");
-        //if (this.canvas != null) {
-        System.out.println("hello");
-        //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
-        //System.out.println(context != null);
-        System.out.println(canvas.getHeight());
-        canvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(data.getArray())), 0, 0, canvas.getWidth(), canvas.getHeight());
-        System.out.println("image drawn");*/
-
     }
 
     @FXML
     void startDrawing() {
         try {
             server.listen();
+            startSide.setDisable(true);
+            drawingSide.setDisable(false);
             // for switching to new scene
             /*try {
                 Platform.runLater(() -> {
@@ -423,6 +391,8 @@ public class Peer implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        startSide.setDisable(true);
+        drawingSide.setDisable(false);
         System.out.println("started listening...");
         /*try {
             Main.getPrimaryStage().hide();
@@ -519,7 +489,7 @@ public class Peer implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+            drawingSide.setDisable(true);
             String ip = "";
             try {
                 ip = InetAddress.getLocalHost().getHostAddress();

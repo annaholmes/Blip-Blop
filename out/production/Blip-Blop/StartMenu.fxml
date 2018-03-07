@@ -9,16 +9,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Peer">
+<AnchorPane prefHeight="400.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Peer">
    <children>
       <HBox layoutY="-18.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="400.0" prefWidth="251.0" HBox.hgrow="NEVER">
+            <AnchorPane prefHeight="400.0" prefWidth="253.0" HBox.hgrow="NEVER">
                <children>
-                  <VBox layoutY="18.0" prefHeight="400.0" prefWidth="472.0" style="-fx-background-color: blanchedalmond;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox fx:id="startSide" layoutY="18.0" prefHeight="400.0" prefWidth="208.0" style="-fx-background-color: lightgrey; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TextField fx:id="yourIP" editable="false" style="-fx-alignment: center; -fx-background-color: blanchedalmond;" />
-                        <AnchorPane prefHeight="217.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
+                        <TextField fx:id="yourIP" editable="false" style="-fx-alignment: center; -fx-background-color: lightgrey;" />
+                        <AnchorPane prefHeight="227.0" prefWidth="223.0" VBox.vgrow="SOMETIMES">
                            <children>
                               <Button fx:id="start" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startDrawing" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Start Drawing" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
                                  <effect>
@@ -42,7 +42,7 @@
                                           <DropShadow color="#00000072" offsetX="5.0" offsetY="5.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="join" layoutY="100.0" mnemonicParsing="false" onAction="#joinDrawing" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Connect" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+                                    <Button fx:id="join" layoutY="100.0" mnemonicParsing="false" onAction="#joinDrawing" prefHeight="29.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Connect" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
                                        <effect>
                                           <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
                                        </effect>
@@ -52,10 +52,16 @@
                            </children>
                         </AnchorPane>
                      </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
                   </VBox>
                </children>
             </AnchorPane>
-            <HBox prefHeight="400.0" prefWidth="661.0">
+            <HBox fx:id="drawingSide" prefHeight="400.0" prefWidth="661.0">
                <children>
                   <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="130.0" style="-fx-background-color: blanchedalmond;" HBox.hgrow="SOMETIMES">
                      <children>
@@ -99,9 +105,9 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </AnchorPane>
-                  <AnchorPane fx:id="toAttach" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="432.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="toAttach" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="432.0" style="-fx-border-color: black;" HBox.hgrow="ALWAYS">
                      <children>
-                        <Canvas fx:id="pCanvas" height="400.0" layoutX="-2.0" layoutY="-2.0" width="400.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-2.0">
+                        <Canvas fx:id="pCanvas" height="600.0" layoutX="-2.0" layoutY="-2.0" width="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
                            <cursor>
                               <Cursor fx:constant="CROSSHAIR" />
                            </cursor>
