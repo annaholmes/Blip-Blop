@@ -79,7 +79,7 @@
                               <AnchorPane />
                               <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="99.0" VBox.vgrow="SOMETIMES">
                                  <children>
-                                    <ColorPicker promptText="Color" style="-fx-background-color: white; -fx-border-color: grey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ColorPicker fx:id="colorPicker" promptText="Color" style="-fx-background-color: white; -fx-border-color: grey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <effect>
                                           <DropShadow color="#00000055" offsetX="5.0" offsetY="5.0" />
                                        </effect>
