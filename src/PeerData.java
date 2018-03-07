@@ -82,6 +82,11 @@ public class PeerData {
 
     }
 
+    public synchronized void setMessage(int m) {
+        this.message = m;
+        //this.peer.updateDrawing(m);
+    }
+
     public synchronized byte[] getArray() {
         System.out.println(this.byteArray);
         return this.byteArray;

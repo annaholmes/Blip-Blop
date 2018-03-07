@@ -29,14 +29,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: grey;" text="Update Drawing">
-                                 <effect>
-                                    <DropShadow color="#00000075" offsetX="5.0" offsetY="5.0" />
-                                 </effect>
-                              </Button>
-                           </children></AnchorPane>
+                        <AnchorPane />
                         <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="99.0" VBox.vgrow="SOMETIMES">
                            <children>
                               <ColorPicker promptText="Color" style="-fx-background-color: white; -fx-border-color: grey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -67,7 +60,7 @@
             </AnchorPane>
             <AnchorPane fx:id="toAttach" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="432.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Canvas fx:id="pCanvas" height="100.0" layoutX="-2.0" layoutY="-2.0" width="100.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-2.0">
+                  <Canvas fx:id="pCanvas" height="400.0" layoutX="-2.0" layoutY="-2.0" width="400.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-2.0">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -75,7 +68,6 @@
                         <Cursor fx:constant="CROSSHAIR" />
                      </cursor>
                   </Canvas>
-                  <Pane fx:id="imgPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
                </children>
             </AnchorPane>
          </children>

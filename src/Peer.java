@@ -87,6 +87,10 @@ public class Peer implements Initializable {
     @FXML
     Canvas pCanvas;
 
+
+    @FXML
+    Canvas startCanvas;
+
     @FXML
     TextArea incoming;
 
@@ -337,9 +341,11 @@ public class Peer implements Initializable {
     }
 
 
-    @FXML
     public void updateDrawing(byte[] b) {
-        System.out.println(this.data.getArray() == null);
+        //incoming.setText(String.valueOf(m));
+
+        Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(b)), 0, 0, pCanvas.getWidth(), pCanvas.getHeight()));
+        /*System.out.println(this.data.getArray() == null);
         System.out.println("is imgpane null: ");
         System.out.println(this.imgPane == null);
         Platform.runLater(new Runnable() {
@@ -350,14 +356,14 @@ public class Peer implements Initializable {
                                 /*  pCanvas.getGraphicsContext2D().beginPath();
                                   pCanvas.getGraphicsContext2D().fillRoundRect(110, 60, 30, 30, 10, 10);
                                   pCanvas.getGraphicsContext2D().closePath();*/
-                                    imgPane.getChildren().add(new ImageView(new Image(new ByteArrayInputStream(b))));
-                              }
+                                  //  imgPane.getChildren().add(new ImageView(new Image(new ByteArrayInputStream(b))));
+                             // }
 
-                          });
+                         // });
 
-        System.out.println(data.isNewMessage());
+        /*System.out.println(data.isNewMessage());
         System.out.println("is canvas null: ");
-        System.out.println(pCanvas == null);
+        System.out.println(pCanvas == null);*/
 
         /*System.out.println("got to this function");
             //if (this.canvas != null) {
@@ -386,7 +392,7 @@ public class Peer implements Initializable {
         try {
             server.listen();
             // for switching to new scene
-            try {
+            /*try {
                 Platform.runLater(() -> {
                     //Main.getPrimaryStage().hide();
                     Parent root1 = null;
@@ -400,7 +406,7 @@ public class Peer implements Initializable {
                 });
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -418,7 +424,7 @@ public class Peer implements Initializable {
             e.printStackTrace();
         }
         System.out.println("started listening...");
-        try {
+        /*try {
             Main.getPrimaryStage().hide();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Blip-BlopGUI.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -427,7 +433,7 @@ public class Peer implements Initializable {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         try {
             ip = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
@@ -492,8 +498,8 @@ public class Peer implements Initializable {
         System.out.println("connection opened");
         try {
             client.sendToServer(queue);
-            //client.sendToServer(message);
             client.sendToServer(byteArray);
+            //client.sendToServer(byteArray);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -513,7 +519,7 @@ public class Peer implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (yourIP != null) {
+
             String ip = "";
             try {
                 ip = InetAddress.getLocalHost().getHostAddress();
@@ -524,7 +530,7 @@ public class Peer implements Initializable {
 
             yourIP.setFocusTraversable(false);
             yourIP.setEditable(false);
-        } else if (pCanvas != null) {
+
             GraphicsContext graphicsContext = pCanvas.getGraphicsContext2D();
             System.out.println("doin this");
             System.out.println(imgPane == null);
@@ -565,7 +571,7 @@ public class Peer implements Initializable {
                     });
 
 
-        }
+
         //} else if (canvas != null) {
 
 

@@ -39,12 +39,12 @@ public class PeerServer extends AbstractServer {
         } /*else if (o instanceof Integer) {
             //synchronized (data) {
             data.setNewMessage(true);
-            data.setImage((Integer) o);
-            //}
+
             System.out.println(o);
             System.out.println(data.getMessage());
+            data.setMessage((Integer) o);
 
-        } */else if (o instanceof byte[]) {
+        }*/ else if (o instanceof byte[]) {
             data.setNewMessage(true);
             System.out.println("hello it's a byte array");
             data.setImage((byte[]) o);

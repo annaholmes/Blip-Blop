@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -8,53 +9,111 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Peer">
+<AnchorPane prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Peer">
    <children>
-      <VBox layoutX="213.0" layoutY="83.0" prefHeight="400.0" prefWidth="146.0" style="-fx-background-color: blanchedalmond; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox layoutY="-18.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="yourIP" editable="false" style="-fx-alignment: center; -fx-background-color: blanchedalmond;" />
-            <AnchorPane prefHeight="217.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
+            <AnchorPane prefHeight="400.0" prefWidth="251.0" HBox.hgrow="NEVER">
                <children>
-                  <Button fx:id="start" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startDrawing" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Start Drawing" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
-                     <effect>
-                        <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
-                     </effect></Button>
-               </children>
-               <padding>
-                  <Insets left="60.0" right="60.0" top="30.0" />
-               </padding>
-            </AnchorPane>
-            <AnchorPane prefHeight="135.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
-               <children>
-                  <HBox layoutX="188.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox layoutY="18.0" prefHeight="400.0" prefWidth="472.0" style="-fx-background-color: blanchedalmond;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TextField fx:id="host" prefHeight="29.0" prefWidth="128.0" promptText="Enter Peer's IP Address" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <effect>
-                              <DropShadow color="#00000072" offsetX="5.0" offsetY="5.0" />
-                           </effect>
-                        </TextField>
-                        <Button fx:id="join" layoutY="100.0" mnemonicParsing="false" onAction="#joinDrawing" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Connect" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
-                           <effect>
-                              <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
-                           </effect></Button>
-                        <TextArea fx:id="outgoing" prefHeight="150.0" prefWidth="100.0" promptText="your message" />
-                        <Button fx:id="send" layoutX="115.0" layoutY="10.0" mnemonicParsing="false" onAction="#sendDrawing" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Send Text">
-                           <effect>
-                              <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
-                           </effect>
-                        </Button>
-                        <TextArea fx:id="incoming" layoutX="258.0" layoutY="10.0" prefHeight="150.0" prefWidth="100.0" promptText="peer message" />
+                        <TextField fx:id="yourIP" editable="false" style="-fx-alignment: center; -fx-background-color: blanchedalmond;" />
+                        <AnchorPane prefHeight="217.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
+                           <children>
+                              <Button fx:id="start" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startDrawing" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Start Drawing" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                                 <effect>
+                                    <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
+                                 </effect>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="40.0" right="40.0" top="30.0" />
+                           </padding>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="135.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
+                           <children>
+                              <HBox layoutX="188.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <TextField fx:id="host" prefHeight="29.0" prefWidth="128.0" promptText="Enter Peer's IP Address" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <effect>
+                                          <DropShadow color="#00000072" offsetX="5.0" offsetY="5.0" />
+                                       </effect>
+                                    </TextField>
+                                    <Button fx:id="join" layoutY="100.0" mnemonicParsing="false" onAction="#joinDrawing" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Connect" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" HBox.hgrow="ALWAYS">
+                                       <effect>
+                                          <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
                      </children>
-                  </HBox>
+                  </VBox>
                </children>
             </AnchorPane>
+            <HBox prefHeight="400.0" prefWidth="661.0">
+               <children>
+                  <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="130.0" style="-fx-background-color: blanchedalmond;" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <VBox prefHeight="400.0" prefWidth="112.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane>
+                                 <children>
+                                    <Button fx:id="send" mnemonicParsing="false" onAction="#sendDrawing" style="-fx-background-color: white; -fx-border-color: grey;" text="Send Drawing" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                       <effect>
+                                          <DropShadow color="#00000075" offsetX="5.0" offsetY="5.0" />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane />
+                              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="99.0" VBox.vgrow="SOMETIMES">
+                                 <children>
+                                    <ColorPicker promptText="Color" style="-fx-background-color: white; -fx-border-color: grey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <effect>
+                                          <DropShadow color="#00000055" offsetX="5.0" offsetY="5.0" />
+                                       </effect>
+                                       <padding>
+                                          <Insets right="10.0" />
+                                       </padding>
+                                    </ColorPicker>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane VBox.vgrow="SOMETIMES">
+                                 <children>
+                                    <Button fx:id="save" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: grey;" text="Save Drawing" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                       <effect>
+                                          <DropShadow color="#00000075" offsetX="5.0" offsetY="5.0" />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </AnchorPane>
+                  <AnchorPane fx:id="toAttach" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="432.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Canvas fx:id="pCanvas" height="400.0" layoutX="-2.0" layoutY="-2.0" width="400.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-2.0">
+                           <cursor>
+                              <Cursor fx:constant="CROSSHAIR" />
+                           </cursor>
+                           <rotationAxis>
+                              <Point3D />
+                           </rotationAxis>
+                        </Canvas>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
          </children>
-         <padding>
-            <Insets left="70.0" right="70.0" />
-         </padding>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>
