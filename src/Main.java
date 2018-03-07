@@ -6,9 +6,21 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private static Stage primaryStage; // **Declare static Stage**
+
+    private static void setPrimaryStage(Stage stage) {
+        Main.primaryStage = stage;
+    }
+
+    static public Stage getPrimaryStage() {
+        return Main.primaryStage;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
+
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 800));
         primaryStage.show();

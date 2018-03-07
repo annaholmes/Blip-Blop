@@ -1,31 +1,25 @@
+import javafx.application.Platform;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
+import java.lang.reflect.Array;
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Queue;
 
 public class PeerServer extends AbstractServer {
 
-    private ArrayList<String> peers;
-    private ArrayList<String> toQueue;
 
-    public boolean isNewMessage() {
-        return newMessage;
-    }
 
-    public void setNewMessage(boolean newMessage) {
-        this.newMessage = newMessage;
-    }
+    public PeerData data;
 
-    public boolean newMessage;
-    private int message;
 
-    public PeerServer(int port) {
+    public PeerServer(int port, PeerData data) {
         super(port);
-        this.newMessage = false;
-        this.peers = new ArrayList<>();
-        this.toQueue = new ArrayList<>();
-        this.message = 0;
+
+        this.data = data;
     }
 
     @Override
@@ -33,18 +27,26 @@ public class PeerServer extends AbstractServer {
         // get message
         // if arg0 is instanceOf queue
             // handle queue
-        System.out.println("message recieved");
+        System.out.println("message received");
 
         if (o instanceof String) {
             System.out.println(o);
-            addToQueue((String) o);
+            //synchronized (data) {
+                data.addToQueue((String) o);
+            //}
         }
         else if (o instanceof ArrayList) {
-            peers = (ArrayList<String>) o;
+            //synchronized (data) {
+                data.setPeers((ArrayList<String>) o);
+            //}
         } else if (o instanceof Integer) {
-            newMessage = true;
-            message = (Integer) o;
+            //synchronized (data) {
+            data.setNewMessage(true);
+            data.setMessage((Integer) o);
+            //}
             System.out.println(o);
+            System.out.println(data.getMessage());
+
         }
         else {
             System.out.println("whoop!");
@@ -53,23 +55,6 @@ public class PeerServer extends AbstractServer {
 
     }
 
-
-
-    public int getMessage() {
-        return message;
-    }
-
-
-    private void addToQueue(String peer) {
-        toQueue.add(peer);
-    }
-
-    public ArrayList<String> getQueue() {
-        peers.addAll(toQueue);
-        toQueue.clear();
-
-        return peers;
-    }
 
 
 
