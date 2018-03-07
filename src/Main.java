@@ -8,6 +8,13 @@ public class Main extends Application {
 
     private static Stage primaryStage; // **Declare static Stage**
 
+    private static Parent root;
+    private static FXMLLoader load = new FXMLLoader();
+
+    static public FXMLLoader getFXMLLoader() {
+        return Main.load;
+    }
+
     private static void setPrimaryStage(Stage stage) {
         Main.primaryStage = stage;
     }
@@ -19,10 +26,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
 
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 600, 800));
+        Parent root = load.load(getClass().getResource("StartMenu.fxml"));
+
+        primaryStage.setTitle("Blip-Blop");
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
 

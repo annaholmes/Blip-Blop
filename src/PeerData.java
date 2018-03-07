@@ -8,12 +8,15 @@ public class PeerData {
     private ArrayList<String> peers;
     private ArrayList<String> toQueue;
 
+    private Peer peer;
+    private byte[] byteArray;
     private Image image;
 
     public boolean newMessage;
     private Integer message;
 
-    public PeerData(String ip) {
+    public PeerData(String ip, Peer peer) {
+        this.peer = peer;
         this.peers = new ArrayList<>();
         peers.add(ip);
         this.toQueue = new ArrayList<>();
@@ -72,11 +75,15 @@ public class PeerData {
 
     public synchronized void setImage(byte[] b) {
         System.out.println("yep got the image");
-        this.image = new Image(new ByteArrayInputStream(b));
+
+        this.byteArray = b;
+        this.peer.updateDrawing(b);
+
 
     }
 
-    public synchronized Image getImage() {
-        return image;
+    public synchronized byte[] getArray() {
+        System.out.println(this.byteArray);
+        return this.byteArray;
     }
 }

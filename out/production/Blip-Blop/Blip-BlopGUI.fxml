@@ -20,9 +20,26 @@
                <children>
                   <VBox prefHeight="400.0" prefWidth="112.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="214.0" prefWidth="99.0" VBox.vgrow="SOMETIMES">
+                        <AnchorPane>
                            <children>
-                              <ColorPicker promptText="Color" style="-fx-background-color: white; -fx-border-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="140.0">
+                              <Button fx:id="send" mnemonicParsing="false" onAction="#sendDrawing" style="-fx-background-color: white; -fx-border-color: grey;" text="Send Drawing" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                 <effect>
+                                    <DropShadow color="#00000075" offsetX="5.0" offsetY="5.0" />
+                                 </effect>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: grey;" text="Update Drawing">
+                                 <effect>
+                                    <DropShadow color="#00000075" offsetX="5.0" offsetY="5.0" />
+                                 </effect>
+                              </Button>
+                           </children></AnchorPane>
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="99.0" VBox.vgrow="SOMETIMES">
+                           <children>
+                              <ColorPicker promptText="Color" style="-fx-background-color: white; -fx-border-color: grey;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <padding>
                                     <Insets right="10.0" />
                                  </padding>
@@ -43,23 +60,14 @@
                         </AnchorPane>
                      </children>
                   </VBox>
-                  <AnchorPane layoutX="10.0" layoutY="10.0">
-                     <children>
-                        <Button fx:id="send" mnemonicParsing="false" onAction="#sendDrawing" style="-fx-background-color: white; -fx-border-color: grey;" text="Send Drawing" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-                           <effect>
-                              <DropShadow color="#00000075" offsetX="5.0" offsetY="5.0" />
-                           </effect>
-                        </Button>
-                     </children>
-                  </AnchorPane>
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
             </AnchorPane>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="432.0" HBox.hgrow="ALWAYS">
+            <AnchorPane fx:id="toAttach" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="432.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Canvas fx:id="canvas" height="404.0" layoutX="-2.0" layoutY="-2.0" width="432.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-2.0">
+                  <Canvas fx:id="pCanvas" height="100.0" layoutX="-2.0" layoutY="-2.0" width="100.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="-2.0">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -67,6 +75,7 @@
                         <Cursor fx:constant="CROSSHAIR" />
                      </cursor>
                   </Canvas>
+                  <Pane fx:id="imgPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
                </children>
             </AnchorPane>
          </children>

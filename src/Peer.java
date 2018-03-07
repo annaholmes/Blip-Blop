@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.embed.swing.SwingFXUtils;
@@ -19,8 +20,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Path;
 import javafx.stage.Modality;
@@ -31,15 +34,19 @@ import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.ResourceBundle;
 
-public class Peer  {
+public class Peer implements Initializable {
 
     private PeerServer server;
     private PeerClient client;
@@ -53,9 +60,14 @@ public class Peer  {
 
     Stage stage;
 
-    @FXML
-    Canvas canvas;
+    //@FXML
+    //Canvas canvas;
 
+    @FXML
+    Button updateDrawing;
+
+    @FXML
+    Pane imgPane;
 
     @FXML
     Button save;
@@ -64,24 +76,33 @@ public class Peer  {
     Button send;
 
     @FXML
+    AnchorPane toAttach;
+
+    @FXML
     TextField host;
 
     @FXML
     TextArea outgoing;
 
     @FXML
+    Canvas pCanvas;
+
+    @FXML
     TextArea incoming;
 
+    Image toWrite;
 
 
     @FXML
     TextField yourIP;
 
+    @FXML
+    ArrayList<byte[]> imgArray;
 
 
     // big credit for canvas drawing!
     // https://stackoverflow.com/questions/43429251/how-to-draw-a-continuous-line-with-mouse-on-javafx-canvas
-    public void initialize() {
+    /*public void initialize() {
         if (yourIP != null) {
             String ip = "";
             try {
@@ -96,7 +117,6 @@ public class Peer  {
         } else if (canvas != null) {
             final GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
             context = canvas.getGraphicsContext2D();
-
             canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     new EventHandler<MouseEvent>(){
                         @Override
@@ -130,11 +150,17 @@ public class Peer  {
                         }
                     });
 
+            //canvas.widthProperty().addListener(event -> addImageToCanvas(imageToBeDrawn.get()));
+            //canvas.heightProperty().addListener(event -> addImageToCanvas(imageToBeDrawn.get()));
+
+
 
         }
 
 
-    }
+    }*/
+
+
 
 
     public Peer() {
@@ -145,31 +171,47 @@ public class Peer  {
             e.printStackTrace();
         }
 
-        data = new PeerData(ip);
+        data = new PeerData(ip, this);
         server = new PeerServer(port, data);
+        //pCanvas = new Canvas();
 
 
-        Task task = new Task<Void>() {
+
+
+        /*Task task = new Task<Void>() {
             @Override
             public Void call() throws Exception {
-                while (true)
-                {
+                while (true) {
                     //synchronized (data) {
                     System.out.println(data.isNewMessage());
+                    System.out.println("is canvas null: ");
+                    System.out.println(pCanvas == null);
                     if (data.isNewMessage()) {
-                        updateDrawing();
+                        data.setNewMessage(false);
+                        System.out.println("got to this function");
+                        //if (this.canvas != null) {
+                        System.out.println("hello");
+                        //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
+                        //System.out.println(context != null);
+                        restartEverything(new Image(new ByteArrayInputStream(data.getArray())));
+                        System.out.println(data.getArray());
+                        System.out.println(pCanvas.getHeight());
+                        System.out.println("image drawn");
                     }
                     //System.out.println(data.getImage() == null);
 
                     //}
-                    Thread.sleep (5000);
+
                     System.out.println("update");
+                    Thread.sleep(5000);
                 }
             }
         };
         Thread th = new Thread(task);
         th.setDaemon(true);
-        th.start();
+        th.start();*/
+
+
 
         /*try {
             server.listen();
@@ -225,16 +267,117 @@ public class Peer  {
 
     }
 
-    void updateDrawing() {
-        data.setNewMessage(false);
+
+
+
+
+    /*public void getDrawing() {
+        //System.out.println(this.imgArray);
+        System.out.println(data == null);
+        System.out.println(this.data.getArray());
+        Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(this.data.getArray())), 10, 10, 20, 20));
+
+    }*/
+
+    public void restartEverything(byte[] b) {
+        System.out.println("restarting... everything");
+        Canvas c = new Canvas();
+
+
+        Platform.runLater(() -> {
+                pCanvas.getGraphicsContext2D().beginPath();
+            pCanvas.getGraphicsContext2D().fillRoundRect(110, 60, 30, 30, 10, 10);
+            pCanvas.getGraphicsContext2D().closePath();});
+
+
+
+
+       /*
+        GraphicsContext graphicsContext = pCanvas.getGraphicsContext2D();
+        toAttach.getChildren().add(pCanvas);
+        pCanvas.setHeight(400);
+        pCanvas.setWidth(400);
+        pCanvas.setStyle("-fx-border-color: red");
+        Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(img, 5, 5, 200, 200));
+
+        pCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        graphicsContext.beginPath();
+                        graphicsContext.moveTo(event.getX(), event.getY());
+                        graphicsContext.stroke();
+
+                    }
+                });
+
+        pCanvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        graphicsContext.lineTo(event.getX(), event.getY());
+                        graphicsContext.stroke();
+                        graphicsContext.closePath();
+                        graphicsContext.beginPath();
+                        graphicsContext.moveTo(event.getX(), event.getY());
+                    }
+                });
+
+        pCanvas.addEventHandler(MouseEvent.MOUSE_RELEASED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        graphicsContext.lineTo(event.getX(), event.getY());
+                        graphicsContext.stroke();
+                        graphicsContext.closePath();
+                    }
+                });*/
+
+
+    }
+
+
+    @FXML
+    public void updateDrawing(byte[] b) {
+        System.out.println(this.data.getArray() == null);
+        System.out.println("is imgpane null: ");
+        System.out.println(this.imgPane == null);
+        Platform.runLater(new Runnable() {
+                              @Override
+                              public void run() {
+                                  System.out.println("but really tho?");
+                                  System.out.println(imgPane==null);
+                                /*  pCanvas.getGraphicsContext2D().beginPath();
+                                  pCanvas.getGraphicsContext2D().fillRoundRect(110, 60, 30, 30, 10, 10);
+                                  pCanvas.getGraphicsContext2D().closePath();*/
+                                    imgPane.getChildren().add(new ImageView(new Image(new ByteArrayInputStream(b))));
+                              }
+
+                          });
+
+        System.out.println(data.isNewMessage());
+        System.out.println("is canvas null: ");
+        System.out.println(pCanvas == null);
+
+        /*System.out.println("got to this function");
+            //if (this.canvas != null) {
+        System.out.println("hello");
+            //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
+            //System.out.println(context != null);
+        //restartEverything(new Image(new ByteArrayInputStream(data.getArray())));
+        System.out.println(b);
+        System.out.println(pCanvas.getHeight());
+        System.out.println("image drawn");
+        Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(b)),2, 4, 20, 20));
+        /*data.setNewMessage(false);
         System.out.println("got to this function");
         //if (this.canvas != null) {
-            System.out.println("hello");
-            //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
-        canvas.getGraphicsContext2D().drawImage(data.getImage(), 0, 0, canvas.getWidth(), canvas.getHeight());
-            System.out.println(data.getImage() == null);
-
-       // }
+        System.out.println("hello");
+        //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
+        //System.out.println(context != null);
+        System.out.println(canvas.getHeight());
+        canvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(data.getArray())), 0, 0, canvas.getWidth(), canvas.getHeight());
+        System.out.println("image drawn");*/
 
     }
 
@@ -244,13 +387,18 @@ public class Peer  {
             server.listen();
             // for switching to new scene
             try {
-                Main.getPrimaryStage().hide();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Blip-BlopGUI.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
-                Main.getPrimaryStage().setScene(new Scene(root1));
-                Main.getPrimaryStage().show();
-
-            } catch(Exception e) {
+                Platform.runLater(() -> {
+                    //Main.getPrimaryStage().hide();
+                    Parent root1 = null;
+                    try {
+                        root1 = FXMLLoader.load(getClass().getResource("Blip-BlopGUI.fxml"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Main.getPrimaryStage().setScene(new Scene(root1));
+                    Main.getPrimaryStage().show();
+                });
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } catch (IOException e) {
@@ -259,7 +407,6 @@ public class Peer  {
         System.out.println("started listening...");
 
     }
-
 
 
     @FXML
@@ -278,7 +425,7 @@ public class Peer  {
             Main.getPrimaryStage().setScene(new Scene(root1));
             Main.getPrimaryStage().show();
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
@@ -313,9 +460,10 @@ public class Peer  {
 
     @FXML
     void sendDrawing() {
-        WritableImage wim = new WritableImage(((Double) canvas.getWidth()).intValue(), ((Double) canvas.getHeight()).intValue());
+        System.out.println(pCanvas.getWidth() + " " + pCanvas.getHeight());
+        WritableImage wim = new WritableImage(((Double) pCanvas.getWidth()).intValue(), ((Double) pCanvas.getHeight()).intValue());
         //int message = Integer.valueOf(outgoing.getText());
-        Image snapshot = canvas.snapshot(null, wim);
+        Image snapshot = pCanvas.snapshot(null, wim);
         BufferedImage bI = SwingFXUtils.fromFXImage(snapshot, null);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
@@ -363,4 +511,101 @@ public class Peer  {
         // client send message to peer
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (yourIP != null) {
+            String ip = "";
+            try {
+                ip = InetAddress.getLocalHost().getHostAddress();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+            yourIP.setText("Your IP is " + ip);
+
+            yourIP.setFocusTraversable(false);
+            yourIP.setEditable(false);
+        } else if (pCanvas != null) {
+            GraphicsContext graphicsContext = pCanvas.getGraphicsContext2D();
+            System.out.println("doin this");
+            System.out.println(imgPane == null);
+
+
+
+            pCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            graphicsContext.beginPath();
+                            graphicsContext.moveTo(event.getX(), event.getY());
+                            graphicsContext.stroke();
+
+                        }
+                    });
+
+            pCanvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            graphicsContext.lineTo(event.getX(), event.getY());
+                            graphicsContext.stroke();
+                            graphicsContext.closePath();
+                            graphicsContext.beginPath();
+                            graphicsContext.moveTo(event.getX(), event.getY());
+                        }
+                    });
+
+            pCanvas.addEventHandler(MouseEvent.MOUSE_RELEASED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            graphicsContext.lineTo(event.getX(), event.getY());
+                            graphicsContext.stroke();
+                            graphicsContext.closePath();
+                        }
+                    });
+
+
+        }
+        //} else if (canvas != null) {
+
+
+
+            /*Task task = new Task<Void>() {
+                @Override
+                public Void call() throws Exception {
+                    while (true) {
+                        //synchronized (data) {
+                        System.out.println(data.isNewMessage());
+                        System.out.println("is canvas null: ");
+                        System.out.println(canvas == null);
+                        if (data.isNewMessage()) {
+                            data.setNewMessage(false);
+                            System.out.println("got to this function");
+                            //if (this.canvas != null) {
+                            System.out.println("hello");
+                            //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
+                            //System.out.println(context != null);
+                            System.out.println(canvas.getHeight());
+                            canvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(data.getArray())), 0, 0, canvas.getWidth(), canvas.getHeight());
+                            System.out.println("image drawn");
+                        }
+                        //System.out.println(data.getImage() == null);
+
+                        //}
+                        Thread.sleep(10000);
+                        System.out.println("update");
+                    }
+                }
+            };
+            Thread th = new Thread(task);
+            th.setDaemon(true);
+            th.start();
+            //canvas.widthProperty().addListener(event -> addImageToCanvas(imageToBeDrawn.get()));
+            //canvas.heightProperty().addListener(event -> addImageToCanvas(imageToBeDrawn.get()));*/
+
+
+    }
 }
+
+
+

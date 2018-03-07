@@ -12,6 +12,7 @@ public class PeerServer extends AbstractServer {
     public PeerData data;
 
 
+
     public PeerServer(int port, PeerData data) {
         super(port);
 
@@ -47,7 +48,10 @@ public class PeerServer extends AbstractServer {
             data.setNewMessage(true);
             System.out.println("hello it's a byte array");
             data.setImage((byte[]) o);
+
+            //this.peer.setImgArray((byte[]) o);
             //System.out.println(data.getMessage());
+
         }
         else {
             System.out.println("whoop!");
