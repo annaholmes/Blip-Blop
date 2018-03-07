@@ -250,6 +250,16 @@ public class Peer  {
         }
         System.out.println("started listening...");
         try {
+            Main.getPrimaryStage().hide();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Blip-BlopGUI.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Main.getPrimaryStage().setScene(new Scene(root1));
+            Main.getPrimaryStage().show();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        try {
             ip = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
             e.printStackTrace();
