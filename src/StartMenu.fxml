@@ -12,6 +12,7 @@
    <children>
       <VBox layoutX="213.0" layoutY="83.0" prefHeight="400.0" prefWidth="146.0" style="-fx-background-color: blanchedalmond; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <TextField fx:id="yourIP" style="-fx-alignment: center; -fx-background-color: blanchedalmond;" />
             <AnchorPane prefHeight="217.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
                <children>
                   <Button fx:id="start" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startDrawing" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Start Drawing" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
@@ -41,11 +42,6 @@
                            </effect></Button>
                         <TextArea fx:id="outgoing" prefHeight="150.0" prefWidth="100.0" promptText="your message" />
                         <Button fx:id="send" layoutX="115.0" layoutY="10.0" mnemonicParsing="false" onAction="#sendDrawing" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Send Text">
-                           <effect>
-                              <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
-                           </effect>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#updateDrawing" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="update">
                            <effect>
                               <DropShadow color="#00000077" offsetX="5.0" offsetY="5.0" />
                            </effect>

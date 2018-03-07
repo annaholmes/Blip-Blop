@@ -44,6 +44,20 @@ public class Peer  {
     @FXML
     TextArea incoming;
 
+    @FXML
+    TextField yourIP;
+
+
+    public void initialize() {
+        String ip = "";
+        try {
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        yourIP.setText("Your IP is " + ip);
+        yourIP.setEditable(false);
+    }
 
 
     public Peer() {
@@ -119,7 +133,7 @@ public class Peer  {
                             data.setNewMessage(false);
                         }
                     //}
-                    Thread.sleep (5000);
+                    Thread.sleep (3000);
                     System.out.println("update");
                 }
             }
@@ -127,7 +141,6 @@ public class Peer  {
         Thread th = new Thread(task);
         th.setDaemon(true);
         th.start();
-
     }
 
     @FXML
@@ -151,10 +164,7 @@ public class Peer  {
 
     }
 
-    @FXML
-    void updateDrawing() {
-        incoming.setText(String.valueOf(data.getMessage()));
-    }
+
 
     @FXML
     void joinDrawing() {
