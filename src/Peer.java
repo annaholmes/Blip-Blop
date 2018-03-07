@@ -36,10 +36,7 @@ import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.URL;
@@ -281,74 +278,6 @@ public class Peer implements Initializable {
 
 
 
-
-
-    /*public void getDrawing() {
-        //System.out.println(this.imgArray);
-        System.out.println(data == null);
-        System.out.println(this.data.getArray());
-        Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(this.data.getArray())), 10, 10, 20, 20));
-
-    }*/
-
-    public void restartEverything(byte[] b) {
-        System.out.println("restarting... everything");
-        Canvas c = new Canvas();
-
-
-        Platform.runLater(() -> {
-                pCanvas.getGraphicsContext2D().beginPath();
-            pCanvas.getGraphicsContext2D().fillRoundRect(110, 60, 30, 30, 10, 10);
-            pCanvas.getGraphicsContext2D().closePath();});
-
-
-
-
-       /*
-        GraphicsContext graphicsContext = pCanvas.getGraphicsContext2D();
-        toAttach.getChildren().add(pCanvas);
-        pCanvas.setHeight(400);
-        pCanvas.setWidth(400);
-        pCanvas.setStyle("-fx-border-color: red");
-        Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(img, 5, 5, 200, 200));
-
-        pCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        graphicsContext.beginPath();
-                        graphicsContext.moveTo(event.getX(), event.getY());
-                        graphicsContext.stroke();
-
-                    }
-                });
-
-        pCanvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        graphicsContext.lineTo(event.getX(), event.getY());
-                        graphicsContext.stroke();
-                        graphicsContext.closePath();
-                        graphicsContext.beginPath();
-                        graphicsContext.moveTo(event.getX(), event.getY());
-                    }
-                });
-
-        pCanvas.addEventHandler(MouseEvent.MOUSE_RELEASED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        graphicsContext.lineTo(event.getX(), event.getY());
-                        graphicsContext.stroke();
-                        graphicsContext.closePath();
-                    }
-                });*/
-
-
-    }
-
-
     public void updateDrawing(byte[] b) {
         Platform.runLater(() -> pCanvas.getGraphicsContext2D().drawImage(new Image(new ByteArrayInputStream(b)), 0, 0, pCanvas.getWidth(), pCanvas.getHeight()));
     }
@@ -382,6 +311,20 @@ public class Peer implements Initializable {
 
     }
 
+    @FXML
+    void saveDrawing() {
+        WritableImage wim = new WritableImage(((Double) pCanvas.getWidth()).intValue(), ((Double) pCanvas.getHeight()).intValue());
+        Image snapshot = pCanvas.snapshot(null, wim);
+        BufferedImage bI = SwingFXUtils.fromFXImage(snapshot, null);
+        File f = new File("pix/" + String.valueOf(System.currentTimeMillis()) + ".png");
+        try {
+            ImageIO.write(bI, "png", f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     @FXML
     void joinDrawing() {
