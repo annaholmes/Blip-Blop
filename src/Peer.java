@@ -47,10 +47,15 @@ public class Peer  {
     private PeerData data;
 
 
+
+    GraphicsContext context;
+
+
     Stage stage;
 
     @FXML
     Canvas canvas;
+
 
     @FXML
     Button save;
@@ -90,6 +95,7 @@ public class Peer  {
             yourIP.setEditable(false);
         } else if (canvas != null) {
             final GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+            context = canvas.getGraphicsContext2D();
 
             canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     new EventHandler<MouseEvent>(){
@@ -123,26 +129,8 @@ public class Peer  {
                             graphicsContext.closePath();
                         }
                     });
-            Task task = new Task<Void>() {
-                @Override
-                public Void call() throws Exception {
-                    while (true)
-                    {
-                        //synchronized (data) {
-                        if (data.isNewMessage()) {
-                            //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
-                            graphicsContext.drawImage(data.getImage(), 0, 0, canvas.getWidth(), canvas.getHeight());
-                            data.setNewMessage(false);
-                        }
-                        //}
-                        Thread.sleep (3000);
-                        System.out.println("update");
-                    }
-                }
-            };
-            Thread th = new Thread(task);
-            th.setDaemon(true);
-            th.start();
+
+
         }
 
 
@@ -161,6 +149,27 @@ public class Peer  {
         server = new PeerServer(port, data);
 
 
+        Task task = new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                while (true)
+                {
+                    //synchronized (data) {
+                    System.out.println(data.isNewMessage());
+                    if (data.isNewMessage()) {
+                        updateDrawing();
+                    }
+                    //System.out.println(data.getImage() == null);
+
+                    //}
+                    Thread.sleep (5000);
+                    System.out.println("update");
+                }
+            }
+        };
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        th.start();
 
         /*try {
             server.listen();
@@ -213,6 +222,19 @@ public class Peer  {
         }));
         fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
         fiveSecondsWonder.play();*/
+
+    }
+
+    void updateDrawing() {
+        data.setNewMessage(false);
+        System.out.println("got to this function");
+        //if (this.canvas != null) {
+            System.out.println("hello");
+            //Platform.runLater(() -> incoming.setText(incoming.getText() + data.getMessage()));
+        canvas.getGraphicsContext2D().drawImage(data.getImage(), 0, 0, canvas.getWidth(), canvas.getHeight());
+            System.out.println(data.getImage() == null);
+
+       // }
 
     }
 

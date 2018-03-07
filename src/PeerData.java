@@ -66,10 +66,12 @@ public class PeerData {
     }
 
     public synchronized void setNewMessage(boolean newMessage) {
+        System.out.println("setting is new message " + newMessage);
         this.newMessage = newMessage;
     }
 
     public synchronized void setImage(byte[] b) {
+        System.out.println("yep got the image");
         this.image = new Image(new ByteArrayInputStream(b));
 
     }

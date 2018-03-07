@@ -47,6 +47,7 @@ public class PeerServer extends AbstractServer {
             data.setNewMessage(true);
             System.out.println("hello it's a byte array");
             data.setImage((byte[]) o);
+            //System.out.println(data.getMessage());
         }
         else {
             System.out.println("whoop!");
