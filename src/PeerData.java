@@ -16,6 +16,8 @@ public class PeerData {
     }
 
     public synchronized void addToQueue(String peer) {
+
+        System.out.println(peer);
         toQueue.add(peer);
     }
 
@@ -30,8 +32,10 @@ public class PeerData {
     }
 
     public synchronized String cyclePeers() {
+        updatePeers();
         String peer = peers.remove(0);
         peers.add(peer);
+        System.out.println(peers);
         return peer;
     }
 

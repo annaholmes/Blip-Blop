@@ -57,6 +57,7 @@ public class Peer  {
         }
         yourIP.setText("Your IP is " + ip);
         yourIP.setEditable(false);
+
     }
 
 
@@ -212,7 +213,8 @@ public class Peer  {
         String peer;
         //synchronized (data) {
             peer = data.cyclePeers();
-            queue = data.getPeers();
+        queue = data.getPeers();
+        System.out.println(queue);
         //}
         client = new PeerClient(peer, port);
         try {

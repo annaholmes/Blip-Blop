@@ -32,7 +32,7 @@ public class PeerServer extends AbstractServer {
         if (o instanceof String) {
             System.out.println(o);
             //synchronized (data) {
-                data.addToQueue((String) o);
+            data.addToQueue((String) o);
             //}
         }
         else if (o instanceof ArrayList) {
