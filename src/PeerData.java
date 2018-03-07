@@ -1,8 +1,14 @@
+import javafx.scene.image.Image;
+import javafx.scene.shape.Path;
+
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 public class PeerData {
     private ArrayList<String> peers;
     private ArrayList<String> toQueue;
+
+    private Image image;
 
     public boolean newMessage;
     private Integer message;
@@ -36,7 +42,7 @@ public class PeerData {
         String peer = peers.remove(0);
         peers.add(peer);
         System.out.println(peers);
-        return peer;
+        return peers.get(0);
     }
 
     public synchronized ArrayList<String> getToQueue() {
@@ -63,8 +69,12 @@ public class PeerData {
         this.newMessage = newMessage;
     }
 
-    public synchronized void setMessage(Integer message) {
-        System.out.println("here it is! " + message);
-        this.message = message;
+    public synchronized void setImage(byte[] b) {
+        this.image = new Image(new ByteArrayInputStream(b));
+
+    }
+
+    public synchronized Image getImage() {
+        return image;
     }
 }

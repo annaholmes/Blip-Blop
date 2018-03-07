@@ -12,7 +12,7 @@
    <children>
       <VBox layoutX="213.0" layoutY="83.0" prefHeight="400.0" prefWidth="146.0" style="-fx-background-color: blanchedalmond; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="yourIP" style="-fx-alignment: center; -fx-background-color: blanchedalmond;" />
+            <TextField fx:id="yourIP" editable="false" style="-fx-alignment: center; -fx-background-color: blanchedalmond;" />
             <AnchorPane prefHeight="217.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
                <children>
                   <Button fx:id="start" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startDrawing" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: white; -fx-border-color: grey;" text="Start Drawing" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">

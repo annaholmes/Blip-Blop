@@ -1,13 +1,9 @@
-import javafx.application.Platform;
+import javafx.scene.shape.Path;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
-import java.lang.reflect.Array;
-import java.net.InetAddress;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Queue;
 
 public class PeerServer extends AbstractServer {
 
@@ -39,14 +35,18 @@ public class PeerServer extends AbstractServer {
             //synchronized (data) {
                 data.setPeers((ArrayList<String>) o);
             //}
-        } else if (o instanceof Integer) {
+        } /*else if (o instanceof Integer) {
             //synchronized (data) {
             data.setNewMessage(true);
-            data.setMessage((Integer) o);
+            data.setImage((Integer) o);
             //}
             System.out.println(o);
             System.out.println(data.getMessage());
 
+        } */else if (o instanceof byte[]) {
+            data.setNewMessage(true);
+            System.out.println("hello it's a byte array");
+            data.setImage((byte[]) o);
         }
         else {
             System.out.println("whoop!");
