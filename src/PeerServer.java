@@ -53,7 +53,9 @@ public class PeerServer extends AbstractServer {
             //System.out.println(data.getMessage());
 
         } else if (o instanceof Integer) {
+            System.out.println("Hi");
             data.setMessage((Integer) o);
+            System.out.println(data.getMessage());
         }
         else {
             System.out.println("whoop!");

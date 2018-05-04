@@ -36,7 +36,7 @@ public class Tests {
         Assert.assertEquals(data.getPeers(), test);
     }
 
-    public void selfConnect(Peer peer, PeerData data, PeerServer server, PeerClient client) {
+    public void selfConnect(PeerServer server, PeerClient client) {
         try {
             server.listen();
         } catch (IOException e) {
@@ -61,7 +61,7 @@ public class Tests {
         PeerData data = new PeerData(ip, peer);
         PeerClient client = new PeerClient(ip, 5000);
         PeerServer server = new PeerServer(5000, data);
-        selfConnect(peer, data, server, client);
+        selfConnect(server, client);
         Assert.assertTrue(client.isConnected());
         try {
             client.closeConnection();
@@ -74,7 +74,7 @@ public class Tests {
     }
 
     @Test
-    public void testSendIP() throws IOException {
+    public void testSendData() throws IOException {
         String ip = "";
         try {
             ip = InetAddress.getLocalHost().getHostAddress();
@@ -82,11 +82,10 @@ public class Tests {
             e.printStackTrace();
         }
         Peer peer = new Peer();
-        PeerData data = new PeerData(ip, peer);
         PeerClient client = new PeerClient(ip, 5000);
         PeerServer server = new PeerServer(5000, peer.data);
-        selfConnect(peer, peer.data, server, client);
-        Assert.assertEquals(data.getPeers().get(0), ip);
+        selfConnect(server, client);
+        Assert.assertEquals(peer.data.getPeers().get(0), ip);
         try {
             client.closeConnection();
         } catch (IOException e) {
@@ -95,15 +94,16 @@ public class Tests {
         server.close();
     }
 
-//    @Test
-//    public void testSaveImage() {
-//        Peer peer = new Peer();
-//        peer.pCanvas = new Canvas();
-//        peer.pCanvas.setWidth(50);
-//        peer.pCanvas.setHeight(50);
-//        peer.pCanvas.getGraphicsContext2D().lineTo(3,5);
-//        peer.saveDrawing();
-//    }
+    // Would love to do a test here but the logic is on an FXML thread
+    //    @Test
+    //    public void testSaveImage() {
+    //        Peer peer = new Peer();
+    //        peer.pCanvas = new Canvas();
+    //        peer.pCanvas.setWidth(50);
+    //        peer.pCanvas.setHeight(50);
+    //        peer.pCanvas.getGraphicsContext2D().lineTo(3,5);
+    //        peer.saveDrawing();
+    //    }
 
 
 }
