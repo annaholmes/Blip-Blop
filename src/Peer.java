@@ -50,9 +50,9 @@ import java.util.ResourceBundle;
 
 public class Peer implements Initializable {
 
-    private PeerServer server;
+    public PeerServer server;
     private PeerClient client;
-    private int port = 3000;
+    private int port = 5000;
     public PeerData data;
 
 

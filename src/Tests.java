@@ -59,8 +59,9 @@ public class Tests {
         }
         Peer peer = new Peer();
         PeerData data = new PeerData(ip, peer);
-        PeerClient client = new PeerClient(ip, 5000);
+
         PeerServer server = new PeerServer(5000, data);
+        PeerClient client = new PeerClient(ip, 5000);
         selfConnect(server, client);
         Assert.assertTrue(client.isConnected());
         try {
@@ -83,15 +84,18 @@ public class Tests {
         }
         Peer peer = new Peer();
         PeerClient client = new PeerClient(ip, 5000);
-        PeerServer server = new PeerServer(5000, peer.data);
-        selfConnect(server, client);
+        selfConnect(peer.server,client);
+        client.sendToServer(new Integer(5));
         Assert.assertEquals(peer.data.getPeers().get(0), ip);
         try {
             client.closeConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        server.close();
+        peer.server.close();
+        System.out.println("connection closed");
+        Assert.assertEquals(peer.data.getMessage(),new Integer(5));
+
     }
 
     // Would love to do a test here but the logic is on an FXML thread
