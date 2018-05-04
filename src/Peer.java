@@ -53,7 +53,7 @@ public class Peer implements Initializable {
     private PeerServer server;
     private PeerClient client;
     private int port = 3000;
-    private PeerData data;
+    public PeerData data;
 
 
 

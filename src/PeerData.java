@@ -25,8 +25,6 @@ public class PeerData {
     }
 
     public synchronized void addToQueue(String peer) {
-
-        System.out.println(peer);
         toQueue.add(peer);
     }
 
@@ -47,6 +45,7 @@ public class PeerData {
         System.out.println(peers);
         return peers.get(0);
     }
+
 
     public synchronized ArrayList<String> getToQueue() {
         return toQueue;

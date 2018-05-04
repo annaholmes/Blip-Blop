@@ -52,6 +52,8 @@ public class PeerServer extends AbstractServer {
             //this.peer.setImgArray((byte[]) o);
             //System.out.println(data.getMessage());
 
+        } else if (o instanceof Integer) {
+            data.setMessage((Integer) o);
         }
         else {
             System.out.println("whoop!");
